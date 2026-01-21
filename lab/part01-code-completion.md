@@ -4,7 +4,7 @@ In this section, you'll use GitHub Copilot's code completion to implement API en
 
 > IMPORTANT: For this exercise, **DO NOT** copy and paste the code snippet provided, but rather type it manually. This will allow you to experience code completion as you would if you were coding back at your desk. You'll likely see you only have to type a few characters before GitHub Copilot begins suggesting the rest.
 
-1. [] Stop debugging the appliaction if it is currently running.
+1. [] Stop debugging the application if it is currently running.
 
 
 1. [] In the Solution Explorer, in the **Products** project, open **Endpoints/ProductEndpoints.cs** - it will have a single endpoint implemented.

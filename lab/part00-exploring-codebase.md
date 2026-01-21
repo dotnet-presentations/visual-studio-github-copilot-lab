@@ -3,7 +3,7 @@
 GitHub Copilot Chat allows you to ask questions about your code and get intelligent responses.
 
 1. [] Open the solution in Visual Studio 2026 if it is not already open.
-1. Click on the Github Copilot Chat in the top-right corner of Visual Studio and select **Open Chat Window** or press `Ctrl+\+C` if Copilot chat isn't open.
+1. Click on the GitHub Copilot Chat in the top-right corner of Visual Studio and select **Open Chat Window** or press `Ctrl+\+C` if Copilot chat isn't open.
    ![Open chat window dialog](./images/1-open-copilot-chat.png)
 1. [] Ensure that you are in **Ask** mode by clicking on the **Ask** tab at the bottom of the chat window.
    ![Ask mode tab](./images/0-ask-mode.png)
