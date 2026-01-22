@@ -24,8 +24,8 @@ The solution already includes a **TinyShop.Tests** project with MSTest configure
 
 Now let's create a prompt file that helps generate additional unit tests using MSTest.
 
-1. [] In **Solution Explorer** under the we will see the **GitHub Node** from teh extension to add it easily:
-   - Right-Click the **GitHub Node** icon/extension in Visual Studio.
+1. [] In **Solution Explorer** we will see the **GitHub** node from the extension to add it easily:
+   - Right-Click the **GitHub** node icon/extension in Visual Studio.
    - Choose **Add Copilot File...**.
    - Select **Prompt file...** from the dialog.
    - Change the file name to `unit-test.prompt.md` and click **OK**.

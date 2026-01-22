@@ -60,7 +60,7 @@ The GitHub MCP server allows Copilot to interact with your GitHub repository. Le
 1. [] Ensure that the GitHub MCP server is selected as an active tool in Copilot Chat.
 1. [] In the same chat session, type: `Based on the asset optimization recommendations, create 3 GitHub issues for improving the TinyShop application's performance.`
 
-   > [!NOTE]
+   > NOTE:
    > Copilot will use the GitHub MCP server to create the issues directly in your repository. You may be prompted to authorize the action.
 
 1. [] Review the issues that Copilot proposes to create.

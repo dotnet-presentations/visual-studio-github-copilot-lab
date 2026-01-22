@@ -6,7 +6,7 @@ In this part, you'll use Planning Mode to plan and implement a feature that allo
 
 ## Understanding Planning Mode
 
-Planning Mode is a preview feature in Agent that helps you:
+Planning Mode is a feature in Agent that helps you:
 - Break down complex features into manageable steps
 - Understand all the files and changes required before implementation
 - Review and refine the plan before Copilot starts generating code
