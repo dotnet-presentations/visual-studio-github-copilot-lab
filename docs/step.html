@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Studio GitHub Copilot Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-code: #1a1a2e;
+            --vs-purple: #68217a;
+            --vs-blue: #0078d4;
+            --neon-purple: #b366ff;
+            --neon-blue: #00d4ff;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --border-color: #2a2a3a;
+            --success-green: #4ec9b0;
+            --warning-yellow: #dcdcaa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* Grid background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, rgba(104,33,122,0.03) 1px, transparent 1px),
+                linear-gradient(rgba(104,33,122,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .header-brand:hover {
+            color: var(--neon-purple);
+        }
+
+        .header-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--vs-purple), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            border-color: var(--neon-purple);
+            color: var(--neon-purple);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* Sidebar */
+        .layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border-color);
+            height: calc(100vh - 65px);
+            position: sticky;
+            top: 65px;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .sidebar-section {
+            padding: 1rem;
+        }
+
+        .sidebar-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            padding: 0 0.5rem;
+        }
+
+        .step-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.625rem 0.75rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            margin-bottom: 0.25rem;
+        }
+
+        .step-link:hover {
+            background: rgba(179,102,255,0.1);
+            color: var(--text-primary);
+        }
+
+        .step-link.active {
+            background: linear-gradient(135deg, rgba(104,33,122,0.3), rgba(0,120,212,0.3));
+            color: var(--text-primary);
+            border-left: 3px solid var(--neon-purple);
+        }
+
+        .step-number {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--border-color);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            flex-shrink: 0;
+        }
+
+        .step-link.active .step-number {
+            background: linear-gradient(135deg, var(--vs-purple), var(--vs-blue));
+        }
+
+        /* Main Content */
+        .main {
+            flex: 1;
+            min-width: 0;
+            padding: 2rem 3rem;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Loading */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            color: var(--text-secondary);
+        }
+
+        .loading::after {
+            content: '';
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--neon-purple);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-left: 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Markdown Styles */
+        .markdown h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--vs-purple), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.3;
+        }
+
+        .markdown h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem;
+            color: var(--neon-purple);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .markdown h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 2rem 0 0.75rem;
+            color: var(--neon-blue);
+        }
+
+        .markdown h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .markdown p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .markdown a {
+            color: var(--neon-purple);
+            text-decoration: none;
+        }
+
+        .markdown a:hover {
+            text-decoration: underline;
+        }
+
+        .markdown strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .markdown ul, .markdown ol {
+            margin: 1rem 0 1.5rem 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .markdown li {
+            margin-bottom: 0.5rem;
+        }
+
+        .markdown li::marker {
+            color: var(--neon-purple);
+        }
+
+        /* Checkboxes in lists */
+        .markdown input[type="checkbox"] {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .markdown input[type="checkbox"]:checked {
+            background: var(--vs-purple);
+            border-color: var(--vs-purple);
+        }
+
+        .markdown input[type="checkbox"]:checked::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 12px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Code blocks */
+        .markdown code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875em;
+        }
+
+        .markdown :not(pre) > code {
+            background: var(--bg-code);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            color: var(--warning-yellow);
+        }
+
+        .markdown pre {
+            background: var(--bg-code);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .markdown pre code {
+            color: var(--text-primary);
+            background: none;
+            padding: 0;
+        }
+
+        /* Blockquotes / Notes */
+        .markdown blockquote {
+            background: var(--bg-card);
+            border-left: 4px solid var(--vs-purple);
+            border-radius: 0 8px 8px 0;
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+        }
+
+        .markdown blockquote p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        .markdown blockquote p:first-child {
+            font-weight: 600;
+            color: var(--neon-purple);
+        }
+
+        /* Special callouts */
+        .markdown blockquote:has(p:first-child:contains("NOTE")),
+        .markdown blockquote:has(p:first-child:contains("Note")) {
+            border-left-color: var(--vs-blue);
+        }
+
+        .markdown blockquote:has(p:first-child:contains("TIP")),
+        .markdown blockquote:has(p:first-child:contains("Tip")) {
+            border-left-color: var(--success-green);
+        }
+
+        .markdown blockquote:has(p:first-child:contains("IMPORTANT")),
+        .markdown blockquote:has(p:first-child:contains("Important")) {
+            border-left-color: var(--warning-yellow);
+        }
+
+        /* Images */
+        .markdown img {
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin: 1.5rem 0;
+        }
+
+        /* Tables */
+        .markdown table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .markdown th, .markdown td {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        .markdown th {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .markdown td {
+            color: var(--text-secondary);
+        }
+
+        .markdown tr:hover td {
+            background: rgba(179,102,255,0.05);
+        }
+
+        /* Horizontal rule */
+        .markdown hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2.5rem 0;
+        }
+
+        /* Key Takeaway styling */
+        .markdown p:has(strong:first-child:contains("Key Takeaway")) {
+            background: linear-gradient(135deg, rgba(104,33,122,0.2), rgba(0,120,212,0.2));
+            border: 1px solid var(--vs-purple);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin: 2rem 0;
+        }
+
+        /* Navigation Footer */
+        .nav-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-footer-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .nav-footer-btn:hover {
+            border-color: var(--neon-purple);
+            transform: translateY(-2px);
+        }
+
+        .nav-footer-btn.disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* Mobile */
+        @media (max-width: 900px) {
+            .sidebar {
+                display: none;
+            }
+            
+            .main {
+                padding: 1.5rem;
+            }
+
+            .header-title {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="header-brand">
+                <span>🚀</span>
+                <span class="header-title">VS GitHub Copilot Lab</span>
+            </a>
+            <nav class="header-nav">
+                <button class="nav-btn" id="prevBtn" disabled>← Previous</button>
+                <button class="nav-btn" id="nextBtn">Next →</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Workshop Steps</div>
+                <nav id="stepNav"></nav>
+            </div>
+        </aside>
+
+        <main class="main">
+            <article class="content">
+                <div id="markdown-content" class="markdown">
+                    <div class="loading">Loading content</div>
+                </div>
+                <nav class="nav-footer">
+                    <a href="#" class="nav-footer-btn disabled" id="prevLink">← Previous</a>
+                    <a href="#" class="nav-footer-btn" id="nextLink">Next →</a>
+                </nav>
+            </article>
+        </main>
+    </div>
+
+    <script>
+        // Define all steps in order
+        const steps = [
+            { id: 'setup', file: 'setup.md', title: 'Setup & Configuration', number: '00' },
+            { id: 'part00-exploring-codebase', file: 'part00-exploring-codebase.md', title: 'Exploring the Codebase', number: '01' },
+            { id: 'part01-code-completion', file: 'part01-code-completion.md', title: 'Code Completion', number: '02' },
+            { id: 'part02-enhancing-ui', file: 'part02-enhancing-ui.md', title: 'Enhancing UI', number: '03' },
+            { id: 'part03-referencing-files', file: 'part03-referencing-files.md', title: 'Referencing Files', number: '04' },
+            { id: 'part04-custom-instructions', file: 'part04-custom-instructions.md', title: 'Custom Instructions', number: '05' },
+            { id: 'part05-implementing-features', file: 'part05-implementing-features.md', title: 'Agent Mode', number: '06' },
+            { id: 'part06-copilot-vision', file: 'part06-copilot-vision.md', title: 'Copilot Vision', number: '07' },
+            { id: 'part07-debugging-with-copilot', file: 'part07-debugging-with-copilot.md', title: 'Debugging', number: '08' },
+            { id: 'part08-commit-summary-descriptions', file: 'part08-commit-summary-descriptions.md', title: 'Commit Summaries', number: '09' },
+            { id: 'part09-mcp', file: 'part09-mcp.md', title: 'MCP Servers', number: '10' },
+            { id: 'part10-planning-mode', file: 'part10-planning-mode.md', title: 'Planning Mode', number: '11' },
+            { id: 'part11-reusable-prompts', file: 'part11-reusable-prompts.md', title: 'Prompt Files', number: '12' },
+            { id: 'part12-delegate-to-cloud', file: 'part12-delegate-to-cloud.md', title: 'Cloud Delegation', number: '13' },
+        ];
+
+        // Get current step from URL
+        function getCurrentStepId() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('step') || 'setup';
+        }
+
+        function getCurrentStepIndex() {
+            const stepId = getCurrentStepId();
+            return steps.findIndex(s => s.id === stepId);
+        }
+
+        // Build sidebar navigation
+        function buildSidebar() {
+            const nav = document.getElementById('stepNav');
+            const currentId = getCurrentStepId();
+            
+            nav.innerHTML = steps.map(step => `
+                <a href="?step=${step.id}" class="step-link ${step.id === currentId ? 'active' : ''}">
+                    <span class="step-number">${step.number}</span>
+                    <span>${step.title}</span>
+                </a>
+            `).join('');
+        }
+
+        // Update navigation buttons
+        function updateNavigation() {
+            const idx = getCurrentStepIndex();
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const prevLink = document.getElementById('prevLink');
+            const nextLink = document.getElementById('nextLink');
+
+            // Header buttons
+            prevBtn.disabled = idx <= 0;
+            nextBtn.disabled = idx >= steps.length - 1;
+
+            prevBtn.onclick = () => idx > 0 && (window.location.search = `?step=${steps[idx - 1].id}`);
+            nextBtn.onclick = () => idx < steps.length - 1 && (window.location.search = `?step=${steps[idx + 1].id}`);
+
+            // Footer links
+            if (idx > 0) {
+                prevLink.href = `?step=${steps[idx - 1].id}`;
+                prevLink.textContent = `← ${steps[idx - 1].title}`;
+                prevLink.classList.remove('disabled');
+            } else {
+                prevLink.classList.add('disabled');
+                prevLink.textContent = '← Previous';
+            }
+
+            if (idx < steps.length - 1) {
+                nextLink.href = `?step=${steps[idx + 1].id}`;
+                nextLink.textContent = `${steps[idx + 1].title} →`;
+                nextLink.classList.remove('disabled');
+            } else {
+                nextLink.classList.add('disabled');
+                nextLink.textContent = 'Next →';
+            }
+        }
+
+        // Process markdown - fix image paths and handle special syntax
+        function processMarkdown(md) {
+            // Fix image paths - images are in lab/images/
+            md = md.replace(/!\[([^\]]*)\]\(\.\/images\//g, '![$1](../lab/images/');
+            md = md.replace(/!\[([^\]]*)\]\(images\//g, '![$1](../lab/images/');
+            
+            // Convert GitHub-style checkboxes: 1. [] becomes checkbox
+            md = md.replace(/^(\d+)\.\s*\[\s*\]\s*/gm, '$1. <input type="checkbox"> ');
+            
+            // Handle GitHub-style alerts: > [!NOTE], > [!TIP], > [!IMPORTANT]
+            md = md.replace(/>\s*\[!NOTE\]\s*\n/gi, '> **📝 Note**\n>\n');
+            md = md.replace(/>\s*\[!TIP\]\s*\n/gi, '> **💡 Tip**\n>\n');
+            md = md.replace(/>\s*\[!IMPORTANT\]\s*\n/gi, '> **⚠️ Important**\n>\n');
+            md = md.replace(/>\s*\[!WARNING\]\s*\n/gi, '> **⚠️ Warning**\n>\n');
+
+            // Remove navigation links at the bottom (we have our own)
+            md = md.replace(/---\s*\n\s*\[Back:.*$/s, '');
+            md = md.replace(/---\s*\n\s*\[Next:.*$/s, '');
+
+            return md;
+        }
+
+        // Load and render markdown
+        async function loadContent() {
+            const idx = getCurrentStepIndex();
+            if (idx === -1) {
+                document.getElementById('markdown-content').innerHTML = '<p>Step not found. <a href="?step=setup">Go to Setup</a></p>';
+                return;
+            }
+
+            const step = steps[idx];
+            document.title = `${step.title} | VS GitHub Copilot Lab`;
+
+            try {
+                // Fetch markdown from lab folder
+                const response = await fetch(`../lab/${step.file}`);
+                if (!response.ok) throw new Error('Failed to load');
+                
+                let md = await response.text();
+                md = processMarkdown(md);
+                
+                // Configure marked
+                marked.setOptions({
+                    breaks: true,
+                    gfm: true
+                });
+
+                document.getElementById('markdown-content').innerHTML = marked.parse(md);
+            } catch (error) {
+                document.getElementById('markdown-content').innerHTML = `
+                    <h1>Error Loading Content</h1>
+                    <p>Could not load ${step.file}. Please check that the file exists.</p>
+                    <p><a href="index.html">Return to home</a></p>
+                `;
+            }
+        }
+
+        // Initialize
+        buildSidebar();
+        updateNavigation();
+        loadContent();
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const idx = getCurrentStepIndex();
+            if (e.key === 'ArrowLeft' && idx > 0) {
+                window.location.search = `?step=${steps[idx - 1].id}`;
+            } else if (e.key === 'ArrowRight' && idx < steps.length - 1) {
+                window.location.search = `?step=${steps[idx + 1].id}`;
+            }
+        });
+    </script>
+</body>
+</html>
