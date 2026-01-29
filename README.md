@@ -4,6 +4,11 @@
 
 # LAB300 - Hands-on with GitHub Copilot in Visual Studio 2026
 
+[![Workshop Site](https://img.shields.io/badge/Workshop-Site-blueviolet?style=for-the-badge)](https://dotnet-presentations.github.io/visual-studio-github-copilot-lab/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-blue?style=for-the-badge&logo=github)](https://dotnet-presentations.github.io/visual-studio-github-copilot-lab/)
+
+> **🚀 [Start the Workshop](https://dotnet-presentations.github.io/visual-studio-github-copilot-lab/)** - Interactive themed workshop guide with all steps and documentation.
+
 This lab will guide you through using GitHub Copilot's various features in Visual Studio 2026. You'll start with a partially completed TinyShop application and use GitHub Copilot to complete missing features and enhance the application.
 
 ## Prerequisites
@@ -43,5 +48,6 @@ You'll use GitHub Copilot's various features to enhance and complete this applic
 
 | Resources          | Links                             | Description        |
 |:-------------------|:----------------------------------|:-------------------|
+| 🌐 Workshop Site | https://dotnet-presentations.github.io/visual-studio-github-copilot-lab/ | Interactive themed workshop with all steps |
 | Build session page | https://build.microsoft.com/sessions/LAB300 | Event session page with downloadable recording, slides, resources, and speaker bio |
-|Microsoft Learn|https://aka.ms/AAI_DevAppGitHubCop_Plan|Official Collection or Plan with skilling resources to learn at your own pace|
+| Microsoft Learn | https://aka.ms/AAI_DevAppGitHubCop_Plan | Official Collection or Plan with skilling resources to learn at your own pace |
