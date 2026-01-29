@@ -96,6 +96,11 @@
             50% { background-position: 100% 50%; }
         }
 
+        @keyframes emojifall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+
         .subtitle {
             font-size: 1.5rem;
             color: var(--text-secondary);
@@ -376,6 +381,26 @@
                 }
                 confettiCount += 10;
                 counter.textContent = confettiCount;
+
+                // Emoji rain!
+                const emojis = ['🎉', '🎊', '🏆', '⭐', '🚀', '💜', '✨', '🔥', '💯', '🎮'];
+                for (let i = 0; i < 30; i++) {
+                    setTimeout(() => {
+                        const emoji = document.createElement('div');
+                        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                        emoji.style.cssText = `
+                            position: fixed;
+                            top: -50px;
+                            left: ${Math.random() * 100}vw;
+                            font-size: ${2 + Math.random() * 3}rem;
+                            z-index: 1000;
+                            pointer-events: none;
+                            animation: emojifall ${3 + Math.random() * 2}s linear forwards;
+                        `;
+                        document.body.appendChild(emoji);
+                        setTimeout(() => emoji.remove(), 5000);
+                    }, i * 100);
+                }
             }
         });
     </script>
