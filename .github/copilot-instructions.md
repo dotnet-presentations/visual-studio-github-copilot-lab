@@ -1,7 +1,7 @@
 ## TinyShop
 
 <!-- Add./Replace Instructions here -->
-- Use app wide css, keep ui simple as possible, nothing custom
+- Use inline css in the same razor file, keep ui simple as possible, nothing custom
 
 ## Misc
 - To display an image you will always need to use `ImagePrefix` in the web front end which comes from the Configuration["ImagePrefix"] which isc @inject IConfiguration Configuration 
