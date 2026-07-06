@@ -2,7 +2,7 @@
 
 In this section, you'll use Copilot Vision. You can share screenshots of errors and Copilot will interpret the image and resolve the issue. Or share mockups of new designs, and Vision will help you bring them to life. Let's update our design based on a photo our designer gave us.
 
-1. [] Open a new Copilot Chat thread in Agent mode.
+1. [] Open a new Copilot Chat thread in **Agent** mode.
 1. [] Click the **+** button in the chat, select **upload image**, and select the **eshop.png** image found in the root of the cloned repository.
 
     ![Attach image icon](./images/6-add-image.png)

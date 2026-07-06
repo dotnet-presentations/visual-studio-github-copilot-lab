@@ -26,7 +26,7 @@ Now let's create a prompt file that helps generate additional unit tests using M
 
 1. [] In **Solution Explorer** we will see the **GitHub** node from the extension to add it easily:
    - Right-Click the **GitHub** node icon/extension in Visual Studio.
-   - Choose **Add Copilot File...**.
+   - Choose **Add Agent File...**.
    - Select **Prompt file...** from the dialog.
    - Change the file name to `unit-test.prompt.md` and click **OK**.
    - The new file will open in the editor; paste the content shown below into the file and save it.

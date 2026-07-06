@@ -13,10 +13,12 @@ In this section, you'll use GitHub Copilot's code completion to implement API en
    
 1. [] Let's implement a new **MapGet** to get product details for a specific **id**. Move our cursor and click on line 20 under the existing **/** endpoint. Text suggestion may appear or type:
    ```csharp
-   g
+   group.
    ```
 1. [] Wait for the ghost text suggestions to appear (gray text).
-;
+
+> If ghost text doesn't appare and only regular IntelliSense, exit IntelliSense with `ESC` and then press `ALT+.`.
+
    ![Code suggestions](./images/1-ghost-text.png)
 
 1. [] Press Tab to accept the suggestion or continue typing to get more specific suggestions.
@@ -34,6 +36,8 @@ In this section, you'll use GitHub Copilot's code completion to implement API en
      - Open GitHub Copilot Chat in the top-right corner of Visual Studio and select **Open Chat Window** or press `Ctrl+\+C` if Copilot chat isn't open.
      - Switch to **Agent** mode.
      - ![Switch to agent mode](./images/1-agent.png)]
+     - Attach the current document:
+     - ![Attach document](./images/1-attach-document.png)
      - Ask the agent: `Can you implement the rest of the endpoints for the Product API and also implement the ProductService to call these new endpoints in the Store project?`
 
    The end code in **ProductEndpoints.cs** should look similar to:

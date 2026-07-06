@@ -31,8 +31,10 @@ Before delegating to the cloud, it's important to write a clear, detailed prompt
 
 ## Delegating to the Cloud
 
-1. [] Open Copilot Chat and switch to **Agent** mode.
+1. [] Open Copilot Chat and create a new chat
+1. Switch to **Cloud** agent.
 
+   ![Cloud agent](./images/12-cloud-agent.png)
 
 1. [] Enter a detailed prompt for the dark theme feature:
 
@@ -65,15 +67,19 @@ Before delegating to the cloud, it's important to write a clear, detailed prompt
    ```
 
 1. [] Review the prompt to ensure it includes all necessary details.
-1. [] Click on the **Send to Copilot Coding Agent** button (cloud icon) at the bottom of the chat window.
+1. [] Click on the **Send** button (cloud icon) at the bottom of the chat window.
 
-   ![Delegate to Cloud button](./images/12-delegate-cloud.png)
 1. The cloud agent will acknowledge the request and begin processing it.
 1. [] You will be prompted to confirm the delegation and create an issue. Click **Confirm** to proceed.
+
+   ![Confirm cloud](./images/12-confirm.png)
+
 1. [] After the issue has been created you will be able to view the pull request for the changes in in Visual Studio or on GitHub.
   ![View Pull Request](./images/12-view-pull-request.png)
 
 1. When viewing on GitHub, you can see the proposed changes in the pull request, and view the session to see it in realtime.
+
+   ![View PR](./images/12-pull-request-in-vs.png)
 
 
 ## While the Task Runs

@@ -17,23 +17,21 @@ Let's use Planning Mode to implement a feature that allows users to click on a p
 
 1. [] Open the Copilot Chat window if it's not already open.
 1. [] Create a new chat session.
-1. [] Switch to **Agent** mode.
-1. [] Ensure **Planning** is enabled in the tools.
+1. [] Switch to **Plan** mode.
+1. ![Plan mode](./images/5-plan.png)
+1. [] Ensure **Planning** is enabled in the tools, these can also be enabled in normal **Agent* mode.
 
    ![Planning Mode enabled](./images/10-planning-mode.png)
 
 1. [] Enter the following prompt:
 
    ```
-   Create a plan for the following: I want to add product navigation to the TinyShop application. When a user clicks on a product in the product listing page, they should be taken to a new product detail page that shows:
-   - The product image (larger size)
-   - Product name as the page title
-   - Full description
-   - Price
-   - A "Back to Products" button
-
-   The URL should be /product/{id} where id is the product ID.
+   Create a plan for the following: I want to add product navigation to the TinyShop application. When a user clicks on a product in the product listing page, they should be taken to a new product detail page that shows details. Ask me questions along the way.
    ```
+
+   ![Questions](./images/10-questions.png)
+
+1. Answer any questiosn along the way.
 
 1. [] Review the plan that Copilot generates. It should include:
    - Creating a new `ProductDetail.razor` component
@@ -42,9 +40,11 @@ Let's use Planning Mode to implement a feature that allows users to click on a p
    - Adding any necessary CSS styling
    - Etc.
 
-   ![Generated Plan](./images/10-generated-plan.png)
+Once a plan has been created, the plan can be reviewed, iterated upon or implemented with a click of the button. 
 
-1. [] If the plan looks good, click **Execute Plan** to begin implementation.
+![Implement](./images/10-implement.png)
+
+1. [] If the plan looks good, click **Implement Plan** to begin implementation.
 1. [] If you want to modify the plan, you can add additional instructions or ask Copilot to revise specific steps.
 
 ## Reviewing and Refining the Plan
@@ -61,11 +61,12 @@ For example, you might add:
 Update the plan to also ensure the product detail page handles cases where the product ID doesn't exist by showing a "Product not found" message.
 ```
 
-## Executing the Plan
+## Implementing the Plan
 
-1. [] Once you're satisfied with the plan, tell copilot to **Execute Plan**.
-1. [] Copilot will implement each step of the plan, creating and modifying files as needed.
-1. [] Review the changes in the editor as they're made.
+1. [] Once you're satisfied with the plan, click **Implement Plan**.
+1. [] Copilot will change to **Agent** mode, implement each step of the plan, creating and modifying files as needed.
+1. [] Watch teh status and eview the changes in the editor as they're made.
+1. ![Watch implementation](./images/10-watch-implementation.png)
 1. [] Run the application to test the new product navigation feature.
 
 ## Testing the Feature

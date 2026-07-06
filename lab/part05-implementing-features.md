@@ -8,15 +8,15 @@ Let's add the ability to see a list of images into the app:
 
 1. [] Open GitHub Copilot Chat in the top-right corner of Visual Studio and select **Open Chat Window** or press `Ctrl+\+C` if Copilot chat isn't open.
 
-1. [] Switch to **Agent** mode.
-
-   ![Switch to agent mode](./images/1-agent.png)
-
 1. [] In Visual Studio, open a new Copilot Chat with the **+** chat icon.
 
     ![New chat icon in VS copilot](./images/5-new-edits.png)
 
-1. [] At the bottom of the GitHub Copilot Chat pane, select the model (default is "GPT-4o") from the dropdown list, and select **Claude Opus 4.5** from the list of available models.
+1. [] Switch to **Agent** mode.
+
+   ![Switch to agent mode](./images/1-agent.png)
+
+1. [] At the bottom of the GitHub Copilot Chat pane, select the model (default is "Auto") from the dropdown list, and select **GPT-5.3 Codex** from the list of available models.
 
     ![Select Opus in Copilot](./images/5-select-sonnet.png)
 
@@ -24,9 +24,9 @@ Let's add the ability to see a list of images into the app:
 
     > NOTE: You should use your own phrasing when generating the prompt. As highlighted previously, part of the exercise is to become comfortable creating prompts for GitHub Copilot. One key tip is it's always good to provide more guidance to ensure you get the code you are looking for.
 
-    > NOTE: If you are asked to **Enable Claude Opus 4.5 for all clients** click on **Enable** button.
+    > NOTE: If you are asked to **Enable GPT-5.3-Codex for all clients** click on **Enable** button.
 
-Copilot agent mode begins implementing the code suggestions!
+Copilot agent mode begins implementing the feature!
 
 ## Reviewing the changes
 

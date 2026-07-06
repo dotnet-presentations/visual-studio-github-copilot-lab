@@ -5,7 +5,7 @@ In this section, you'll learn how to use Copilot to debug an exception in your a
 1. [] Debug the **AppHost** project if it isn't yet, and open the **store** from the .NET Aspire dashboard.
 1. [] Click on the **Go to About** button in the navigation menu.
 1. [] Observe that an exception occurs, and the application crashes.
-1. [] Press the **Analyze with Copilot** option in the pop up.
+1. [] Press the **Analyze with Copilot** option in the pop up. This will open the **Debugger** agent.
 
     ![Pop up for exception with Analyze with Copilot option](./images/7-ask-copilot-exception.png)
 

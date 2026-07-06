@@ -47,6 +47,8 @@ Here are some guidelines to consider when creating a Copilot instructions file:
 1. [] Review the code suggestion but don't implement it yet.
 1. [] Notice how the responses now incorporate your custom instructions.
 
+![Instructions begin referenced](./images/4-instructions.png)
+
 **Key Takeaway**: Custom instructions make Copilot's suggestions more aligned with your project standards and architecture preferences.
 
 ---

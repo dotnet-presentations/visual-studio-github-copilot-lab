@@ -14,21 +14,24 @@ To see your existing tools and MCP servers installed:
 
    ![MCP Tools icon](./images/9-mcp-tools.png)
 1. Tools that are built in and from MCP servers will appear.
-1. Click the **+** icon to add a new MCP server.
+1. Click the **+** icon to add a new MCP server and **Add from MCP MCP**.
 1. 
    ![Add MCP server](./images/9-add-mcp-server.png)
 1. Specify the following
-1. **Destination**: Solution
-1. **Server Id**: `github`
-1. **Type**: HTTP
-1. **URL**: https://api.githubcopilot.com/mcp/
+1. **Search for GitHub**
+1. **Click Install** -> Trust and install Remote installation.
 
    ![GitHub MCP server configuration](./images/9-github-mcp-server.png)
 
 
-1. The GitHub MCP requires authentication. From the **Solution Explorer**, expand **SolutionItems** and open **.mcp.json**, and you will see a **Authentication required** message. Click on it and click Authenticate. Afer this you will see that it is online and ready to use.
-   ![GitHub MCP authentication](./images/9-github-mcp-authentication.png)
+1. The GitHub MCP requires authentication. From the **Tools** menu in the chat, expand **the Added GitHub MCP** with the ... and then select **Edit**:
 
+   ![GitHub MCP authentication](./images/9-auth-github.png)
+
+
+You will see a **Authentication required** message. Click on it and click Authenticate. Afer this you will see that it is online and ready to use.
+
+   ![Auth GitHub](./images/9-github-mcp-authentication.png)
 
 Visual Studio 2026 has a built in MCP gallery to help you easily install MCP server.:
 
@@ -51,18 +54,21 @@ Now that you have the Microsoft Learn and GitHub MCP servers installed, let's us
 1. [] Ensure that the Microsoft Learn MCP server is selected as an active tool. If you don't see it click on a new chat session or toggle modes:
   ![Select MCP server](./images/9-select-mcp-server.png)
 1. [] Type the following prompt: `Using the Microsoft Learn docs mcp, what are the best practices for optimizing image loading and asset delivery in a Blazor Server application?`
+1. Copilot will ask for permission for each request. You can approve each manually or **Allow in this session**
+1. ![Allow MCP](./impags/9-allow-mcp.png)
 1. [] Review the response from Copilot, which now has access to the latest Microsoft documentation through the MCP server.
 
 ## Creating GitHub Issues with MCP
 
 The GitHub MCP server allows Copilot to interact with your GitHub repository. Let's use it to create issues for improvements we want to make to the application.
 
-1. [] Ensure that the GitHub MCP server is selected as an active tool in Copilot Chat.
+1. [] Ensure that the GitHub MCP server is selected as an active tool in Copilot Chat and that the tools are enabled for .
 1. [] In the same chat session, type: `Based on the asset optimization recommendations, create 3 GitHub issues for improving the TinyShop application's performance.`
 
    > NOTE:
    > Copilot will use the GitHub MCP server to create the issues directly in your repository. You may be prompted to authorize the action.
 
+1. ![create issue enabled](./images/9-create-issue-enabled.png)
 1. [] Review the issues that Copilot proposes to create.
 1. [] Approve the creation of the issues when prompted.
 1. [] Navigate to your GitHub repository to verify that the issues have been created.

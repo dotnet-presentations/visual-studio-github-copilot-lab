@@ -47,17 +47,23 @@ Before we begin, let's install the .github + MCP extension for Visual Studio. Th
 ## Turn on Copilot Settings
 
 1. [] Ensure Code Completions and Next Edit Suggestions are enabled:
-   - Go to the Code Completions settings in Visual Studio by heading to **Tools -> Options -> Text Editor -> Code Completions**
+   - Go to the Code Completions settings in Visual Studio by heading to **Tools -> Options -> Text Editor -> Inline Suggestions -> General** under Suggestion Providers
    - Ensure **Copilot Completions** is checked.
    - Ensure **Copilot Next Edit Suggestions** is checked.
 
    ![](./images/0-enable-nes.png)
 
 1. [] Head to **Tools -> Options -> GitHub -> Copilot -> Copilot Chat** and ensure the following settings are enabled:
+   - **Enable Agent mode in chat pane**
+   - **Enable MCP server integration in agent mdoe**
    - **Enable Planning**
+   - **Enable Ask Question**
    - **Enable View Plan Execution**
-   - **Enable Copilot Coding agent (Preview)**
+   - **Enable Cloud agent (Preview)**
+   - **Enable custom instructions**
 
+1. [] Head to **Tools -> Options -> GitHub -> Editor** and ensure the following settings are enabled:
+   - **Enable AI generated description for auto-inserted documentation comments in support languages**
 
 ## Clone Lab Repository
 
@@ -79,7 +85,7 @@ The code is now opened in Visual Studio. Feel free to take a look at it or skip 
 1. [] Open the **Solution Explorer** from the **View -> Solution Explorer** menu.
 1. [] Set the **TinyShop.AppHost** as the startup project if it isn't already by right-clicking on **TinyShop.AppHost** and selecting **Set as Startup Project**. Start the project with F5 or **Debug -> Start Debugging** from the menu.
 
-    The .NET Aspire AppHost will start two applications and the .NET Aspire Dashboard:
+    The [Aspire](https://aspire.dev) AppHost will start two applications and the  Aspire Dashboard:
 
     - The backend .NET app on **https://localhost:7130/api/Product**
     - The frontend Blazor app on **https://localhost:7085** - You can see the app by opening that URL from the dashboard
