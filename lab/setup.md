@@ -10,7 +10,7 @@ Before starting, ensure you have:
 - **.NET 10 SDK** installed
 - **GitHub account** with one of the following:
   - [GitHub Copilot Free](https://github.com/features/copilot) - Free tier with limited usage
-  - [GitHub Copilot Pro](https://github.com/features/copilot) - Full access (30-day free trial available)
+  - [GitHub Copilot Pro/Pro+/Max](https://github.com/features/copilot) - Full access
   - GitHub Copilot through your organization
 
 > [!TIP]
